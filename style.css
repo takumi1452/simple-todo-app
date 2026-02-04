@@ -1,0 +1,13 @@
+/* todoテキストが完了したら線を引く */
+.completed {
+  text-decoration: line-through;
+  color: gray;
+}
+
+/* 見た目 */
+.todo-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  gap: 8px;
+}
