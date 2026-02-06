@@ -41,9 +41,15 @@ todoArea.addEventListener("click", (event) => {
   }
 
   // チェックボックスが押された場合
-  if (event.target.classList.contains("complete-checkbox")) {
+  if (event.target.type == "checkbox") {
+    const isChecked = event.target.checked;
     const clickedTodoItem = event.target.closest(".todo-item");
     const clickedTodoText = clickedTodoItem.querySelector(".todo-text");
-    clickedTodoText.classList.toggle("completed");
+
+    if (isChecked) {
+      clickedTodoText.classList.add("completed");
+    } else {
+      clickedTodoText.classList.remove("completed");
+    }
   }
 });
