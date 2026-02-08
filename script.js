@@ -1,6 +1,7 @@
 const textInput = document.getElementById("text-input");
 const addButton = document.getElementById("add-btn");
 const todoArea = document.getElementById("todo-area");
+const todos = [];
 
 function createTodoItem(text) {
   const todoItem = document.createElement("div");
@@ -24,10 +25,21 @@ function createTodoItem(text) {
   todoArea.appendChild(todoItem);
 }
 
+function renderTodos() {
+  // 表示エリアの初期化処理
+  todoArea.innerHTML = "";
+}
+
 addButton.addEventListener("click", () => {
   if (textInput.value === "") return;
 
   createTodoItem(textInput.value);
+
+  todos.push({
+    text: textInput.value,
+    completed: false,
+  });
+  console.log(todos);
 
   textInput.value = "";
   textInput.focus();
