@@ -3,13 +3,20 @@ const addButton = document.getElementById("add-btn");
 const todoArea = document.getElementById("todo-area");
 const todos = [];
 
-function createTodoItem(text) {
+// 1行DOMの作成
+function createTodoItem(text, completed) {
   const todoItem = document.createElement("div");
   todoItem.classList.add("todo-item");
 
   const todoCheckbox = document.createElement("input");
   todoCheckbox.type = "checkbox";
   todoCheckbox.classList.add("complete-checkbox");
+  // このif文の部分が修正必要
+  if (completed) {
+    todoCheckbox.classList.add("completed");
+  } else {
+    todoCheckbox.classList.remove("completed");
+  }
   todoItem.appendChild(todoCheckbox);
 
   const todoText = document.createElement("span");
@@ -22,24 +29,35 @@ function createTodoItem(text) {
   deleteButton.classList.add("delete-btn");
   todoItem.appendChild(deleteButton);
 
-  todoArea.appendChild(todoItem);
+  return todoItem;
 }
 
 function renderTodos() {
   // 表示エリアの初期化処理
   todoArea.innerHTML = "";
+
+  todos.forEach((todo) => {
+    // todosを１行ずつ読み取る
+    const text = todo.text;
+    const completed = todo.completed;
+    console.log(text);
+    console.log(completed);
+
+    // 1行DOMの作成→todoAreaに表示
+    todoArea.append(createTodoItem(text, completed));
+  });
 }
 
 addButton.addEventListener("click", () => {
   if (textInput.value === "") return;
 
-  createTodoItem(textInput.value);
-
+  // todosにinputされたテキストとToDo未完了の情報を追加
   todos.push({
     text: textInput.value,
     completed: false,
   });
-  console.log(todos);
+
+  renderTodos();
 
   textInput.value = "";
   textInput.focus();
