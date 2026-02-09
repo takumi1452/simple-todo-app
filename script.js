@@ -33,6 +33,29 @@ function createTodoItem(text, completed, index) {
   return todoItem;
 }
 
+// 追加処理関数
+function addTodo(text) {
+  // todosにinputされたテキストとToDo未完了の情報を追加
+  todos.push({
+    text: text,
+    completed: false,
+  });
+
+  saveTodos();
+  renderTodos();
+}
+
+// 入力欄から追加する関数
+function addTodoFromInput(textInput) {
+  const text = textInput.value.trim();
+  if (text === "") return;
+
+  addTodo(text);
+
+  textInput.value = "";
+  textInput.focus();
+}
+
 function renderTodos() {
   // 表示エリアの初期化処理
   todoArea.innerHTML = "";
@@ -70,20 +93,16 @@ if (savedTodos && savedTodos !== "undefined") {
   }
 }
 
+// Enterキーが押された場合
+textInput.addEventListener("keyup", (event) => {
+  if (event.key === "Enter") {
+    addTodoFromInput(textInput);
+  }
+});
+
+// 追加ボタンが押された場合
 addButton.addEventListener("click", () => {
-  if (textInput.value === "") return;
-
-  // todosにinputされたテキストとToDo未完了の情報を追加
-  todos.push({
-    text: textInput.value,
-    completed: false,
-  });
-
-  saveTodos();
-  renderTodos();
-
-  textInput.value = "";
-  textInput.focus();
+  addTodoFromInput(textInput);
 });
 
 todoArea.addEventListener("click", (event) => {
