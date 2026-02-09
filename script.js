@@ -4,19 +4,14 @@ const todoArea = document.getElementById("todo-area");
 const todos = [];
 
 // 1行DOMの作成
-function createTodoItem(text, completed) {
+function createTodoItem(text, completed, index) {
   const todoItem = document.createElement("div");
   todoItem.classList.add("todo-item");
+  todoItem.setAttribute("data-index", index);
 
   const todoCheckbox = document.createElement("input");
   todoCheckbox.type = "checkbox";
   todoCheckbox.classList.add("complete-checkbox");
-  // このif文の部分が修正必要
-  if (completed) {
-    todoCheckbox.classList.add("completed");
-  } else {
-    todoCheckbox.classList.remove("completed");
-  }
   todoItem.appendChild(todoCheckbox);
 
   const todoText = document.createElement("span");
@@ -29,6 +24,12 @@ function createTodoItem(text, completed) {
   deleteButton.classList.add("delete-btn");
   todoItem.appendChild(deleteButton);
 
+  // チェックボックスの状態の確認
+  if (completed) {
+    todoCheckbox.checked = true;
+    todoText.classList.add("completed");
+  }
+
   return todoItem;
 }
 
@@ -36,15 +37,14 @@ function renderTodos() {
   // 表示エリアの初期化処理
   todoArea.innerHTML = "";
 
-  todos.forEach((todo) => {
+  todos.forEach((todo, index) => {
     // todosを１行ずつ読み取る
     const text = todo.text;
     const completed = todo.completed;
-    console.log(text);
-    console.log(completed);
+    console.log(`text:${text}, completed:${completed}, index:${index}`);
 
     // 1行DOMの作成→todoAreaに表示
-    todoArea.append(createTodoItem(text, completed));
+    todoArea.append(createTodoItem(text, completed, index));
   });
 }
 
