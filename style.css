@@ -15,18 +15,112 @@ body {
     "Open Sans",
     "Helvetica Neue",
     sans-serif;
+  /* 背景色と文字色の決定 */
+  background-color: rgba(6, 88, 60, 0.199);
+  color: black;
 }
 
-/* todoテキストが完了したら線を引く */
-.completed {
-  text-decoration: line-through;
-  color: gray;
+/* タイトルに関して */
+header {
+  /* 内側の余白（headerの中が詰まりすぎないように） */
+  padding: 24px 16px 8px;
+  /* タイトルを中央寄せ */
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+/* 入力欄＋追加ボタンの並び */
+.input-row {
+  /* 横並び */
+  display: flex;
+  /* 入力欄と追加ボタンの間隔 */
+  gap: 8px;
+  /* 下のToDo一覧との距離 */
+  margin-bottom: 16px;
+}
+
+/* 入力欄の見た目の整理 */
+#text-input {
+  /* 横幅を可能な限り広げる（ボタン分は残す） */
+  flex: 1;
+  /* 中の文字が端にくっつかないよう上下、左右を設定 */
+  padding: 10px 12px;
+  /* 枠線 */
+  border: 1px solid #1c1a1a;
+  border-radius: 8px;
+
+  /* flexの中で自然に伸びるのを補強 */
+  width: 100%;
+  /* paddingやborder込みで入力欄のサイズを計算 */
+  box-sizing: border-box;
+}
+
+/* 入力欄をフォーカスした際の枠を整える */
+#text-input:focus {
+  outline: none;
+  border-color: rgb(98, 207, 178);
+}
+
+/* 追加ボタンの整理 */
+#add-btn {
+  padding: 10px 14px;
+  /* ボタン枠を消す */
+  border: none;
+  background-color: rgb(98, 207, 178);
+  border-radius: 8px;
+  /* ボタンにカーソルを合わせたとき矢印→手の形に */
+  cursor: pointer;
+}
+
+/* 追加ボタンにマウスを乗せたときの反応 */
+#add-btn:hover {
+  /* 透明度 */
+  opacity: 0.75;
+}
+
+/* 追加ボタンをクリックしたときに反応を加える */
+#add-btn:active {
+  transform: translateY(1px);
+}
+
+/* 中央にまとめる箱 */
+.container {
+  /* 横に広がりすぎない上限 */
+  max-width: 520px;
+  /* 左右を自動で同じ余白にして中央寄せ */
+  margin: 0 auto;
+  /* 左右と下に余白 */
+  padding: 16px;
+
+  background-color: white;
+  /* 角を丸める。数字が大きいほど丸い */
+  border-radius: 10px;
+
+  /* 影：横ずれ、縦ずれ、ぼかし、色 */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
 
 /* 見た目 */
 .todo-item {
   display: flex;
   align-items: center;
-  margin-bottom: 5px;
   gap: 8px;
+  padding: 8px 10px;
+  /* 区切り線 */
+  border-bottom: 1px solid #eee;
+}
+
+/* Todoの1番下に区切り線がないようにする */
+.todo-item:last-child {
+  border-bottom: none;
+}
+
+/* todoテキストが完了したら線を引く */
+.completed {
+  text-decoration: line-through;
+  color: gray;
 }
